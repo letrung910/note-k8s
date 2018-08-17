@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nodejs-deployment
+  labels:
+    app: nodejs
+spec:
+#  replicas: 3
+  selector:
+    matchLabels:
+      app: nodejs
+  template:
+    metadata:
+      labels:
+        app: nodejs
+    spec:
+      containers:
+      - name: nodejs
+        image: cowpanda/alpine-node-pm2:latest
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+        - mountPath: /code
+          name: codenodejs
+#        command: ["pm2 start --no-daemon /code/hostname.js"]
+#        args: ["pm2", "start --no-daemon /code/hostname.js"]
+      volumes:
+       - name: codenodejs
+         hostPath: 
+          path: /code
+          type: Directory
+      hostAliases:
+      - ip: 127.0.0.1
+        hostnames:
+        - "nodejs.hostname"
+
+
+#        command: ["/bin/bash", "pm2 start --no-daemon /code/hostname.js"]
+#        args: ["pm2", "start", "hostname.js"]
