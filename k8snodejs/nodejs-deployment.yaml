@@ -5,7 +5,7 @@ metadata:
   labels:
     app: nodejs
 spec:
-#  replicas: 3
+  replicas: 3
   selector:
     matchLabels:
       app: nodejs
@@ -22,17 +22,17 @@ spec:
         volumeMounts:
         - mountPath: /code
           name: codenodejs
-#        command: ["pm2 start --no-daemon /code/hostname.js"]
-#        args: ["pm2", "start --no-daemon /code/hostname.js"]
+#        command: ["pm2", "start --no-daemon /code/hello1.js"]
+#        args: ["pm2", "start --no-daemon /code/hello1.js"]
       volumes:
        - name: codenodejs
          hostPath: 
           path: /code
           type: Directory
-      hostAliases:
-      - ip: 127.0.0.1
-        hostnames:
-        - "nodejs.hostname"
+#      hostAliases:
+#      - ip: 127.0.0.1
+#        hostnames:
+#        - "nodejs.hostname"
 
 
 #        command: ["/bin/bash", "pm2 start --no-daemon /code/hostname.js"]
