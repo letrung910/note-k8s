@@ -17,12 +17,13 @@ spec:
       containers:
       - name: nodejs
         image: cowpanda/alpine-node-pm2:latest
+        workingDir: /code
         ports:
         - containerPort: 8080
         volumeMounts:
         - mountPath: /code
           name: codenodejs
-#        command: ["pm2", "start --no-daemon /code/hello1.js"]
+        command: ["/usr/local/bin/pm2", "start", "--no-daemon", "hostname.js"]
 #        args: ["pm2", "start --no-daemon /code/hello1.js"]
       volumes:
        - name: codenodejs
@@ -35,5 +36,5 @@ spec:
 #        - "nodejs.hostname"
 
 
-#        command: ["/bin/bash", "pm2 start --no-daemon /code/hostname.js"]
-#        args: ["pm2", "start", "hostname.js"]
+
+
