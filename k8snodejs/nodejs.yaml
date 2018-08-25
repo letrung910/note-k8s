@@ -1,6 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  namespace: test-letr
   name: nodejs-deployment
   labels:
     app: nodejs
@@ -36,5 +37,18 @@ spec:
 #        - "nodejs.hostname"
 
 
-
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: test-letr
+  name: nodejs-service
+  labels:
+    app: nodejs-service
+spec:
+  type: NodePort
+  ports:
+  - port: 8080
+  selector:
+    app: nodejs
 

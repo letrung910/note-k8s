@@ -1,6 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
+  namespace: test-letr
   name: nginx-deployment
   labels:
     app: nginx
@@ -27,4 +28,23 @@ spec:
          hostPath:
           path: /code/nginx
           type: Directory
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: test-letr
+  name: nginx-service
+spec:
+  selector:
+    app: nginx
+
+  type: NodePort
+#  type: LoadBalancer
+  ports:
+  - port: 80
+    nodePort: 30100
+
+
 
